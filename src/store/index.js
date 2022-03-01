@@ -37,6 +37,10 @@ export default new Vuex.Store({
         key: "users",
         val: data,
       });
+      commit("setState", {
+        key: "filteredList",
+        val: data,
+      });
     },
   },
   modules: {},

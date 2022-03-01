@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Edit from "../views/Edit.vue"
+import NewUser from "../views/NewUser.vue"
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: '/edit',
     name: 'Edit',
     component: Edit
+  },
+  {
+    path: '/add-user',
+    name: 'AddUser',
+    component: NewUser
   },
   // {
   //   path: '/about',

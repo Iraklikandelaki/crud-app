@@ -73,15 +73,17 @@ export default {
           this.form[key] = this.selectedUser[key];
         }
       }
-    //   console.log(this.form);
+      //   console.log(this.form);
       this.replaceForm();
     },
 
     async replaceForm() {
-      const res = await this.$ax.put(
-        `https://jsonplaceholder.typicode.com/users/${this.selectedUser.id}`,
-        this.form
-      );
+      if (this.selectedUser.id <= 10) {
+        const res = await this.$ax.put(
+          `https://jsonplaceholder.typicode.com/users/${this.selectedUser.id}`,
+          this.form
+        );
+      }
 
       const finalArr = this.filteredList.map((item) => {
         if (item.id === this.selectedUser.id) {
@@ -95,8 +97,9 @@ export default {
         key: "filteredList",
         val: finalArr,
       });
-    //   console.log(finalArr);
-    //   console.log(res);
+      console.log(finalArr);
+      console.log(this.filteredList);
+      //   console.log(res);
     },
   },
 };

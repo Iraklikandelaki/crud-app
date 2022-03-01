@@ -49,7 +49,7 @@ export default {
     },
   },
   methods: {
-    sliceList(curr, list = this.userList) {
+    sliceList(curr, list = this.filteredList) {
       const param1 = (curr - 1) * 5;
       const userListSliced = list.slice(param1, param1 + 5);
       this.$store.commit("setState", {
@@ -69,10 +69,11 @@ export default {
       // this.currentPage = curr;
       if (this.userId === null) {
         // this.filteredList = this.userList;
-        this.$store.commit("setState", {
-          key: "filteredList",
-          val: this.userList,
-        });
+        // this.$store.commit("setState", {
+        //   key: "filteredList",
+        //   val: this.userList,
+        // });
+
         this.sliceList(this.currentPage);
       } else {
         const filteredList = this.filteredList.filter(
@@ -89,6 +90,9 @@ export default {
   },
 
   watch: {
+    $route(ns) {
+      // this.filterList(this.currentPage);
+    },
     userId(ns) {
       this.filterList(this.currentPage);
     },
@@ -96,7 +100,14 @@ export default {
       immediate: true,
       deep: true,
       handler(ns) {
+        console.log('mounted')
+        console.log(ns)
+        console.log(this.filteredList)
         if (ns.length) {
+          // this.$store.commit("setState", {
+          //   key: "filteredList",
+          //   val: ns,
+          // });
           this.filterList(1);
         }
       },
