@@ -27,6 +27,7 @@ export default new Vuex.Store({
           lastName: lastNames.join(' '),
           userName: user.username,
           email: user.email,
+          id: user.id,
         }
 
         return obj;
