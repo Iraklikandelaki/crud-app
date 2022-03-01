@@ -1,33 +1,40 @@
 <template>
-  <b-container class="edit-page">
-    <b-form @submit="onSubmit">
+  <b-container class="edit-page pt-5">
+    <b-form @submit="onSubmit" >
+      <h2 class="text-primary mb-4">Edit User</h2>
       <b-form-input
         id="input-1"
-        class="mb-4"
+        class="mb-4 border-info rounded-0"
         v-model="form.firstName"
         :placeholder="selectedUser.firstName"
+        size="lg"
+       
       ></b-form-input>
       <b-form-input
         id="input-2"
-        class="mb-4"
+        class="mb-4 border-info rounded-0"
         v-model="form.lastName"
         :placeholder="selectedUser.lastName"
+         size="lg"
       ></b-form-input>
       <b-form-input
         id="input-3"
-        class="mb-4"
+        class="mb-4 border-info rounded-0"
         v-model="form.userName"
         :placeholder="selectedUser.userName"
+         size="lg"
       ></b-form-input>
 
       <b-form-input
         id="input-4"
+        class="border-info rounded-0"
         v-model="form.email"
         type="email"
         :placeholder="selectedUser.email"
+         size="lg"
       ></b-form-input>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" size="lg" variant="primary mt-4">Submit</b-button>
     </b-form>
   </b-container>
 </template>
@@ -94,6 +101,7 @@ export default {
         key: "filteredList",
         val: finalArr,
       });
+      this.$router.push('/')
     },
   },
 };

@@ -1,11 +1,16 @@
 <template>
+<b-row align-h="center">
   <b-pagination
     v-model="currentPage"
     :total-rows="usersLength"
     :per-page="perPage"
     aria-controls="my-table"
     @input="$parent.$emit('paginate', currentPage)"
+    pills
+    variant="primary"
   ></b-pagination>
+ 
+  </b-row>
 </template>
 
 <script>

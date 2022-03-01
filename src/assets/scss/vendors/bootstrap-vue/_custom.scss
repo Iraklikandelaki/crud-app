@@ -692,8 +692,8 @@ $font-family-base:            $font-family-sans-serif !default;
 // $pagination-padding-x-lg:           1.5rem !default;
 // $pagination-line-height:            1.25 !default;
 
-// $pagination-color:                  $link-color !default;
-// $pagination-bg:                     $white !default;
+$pagination-color:                  $primary!default;
+$pagination-bg:                     $white !default;
 // $pagination-border-width:           $border-width !default;
 // $pagination-border-color:           $gray-300 !default;
 
@@ -704,9 +704,9 @@ $font-family-base:            $font-family-sans-serif !default;
 // $pagination-hover-bg:               $gray-200 !default;
 // $pagination-hover-border-color:     $gray-300 !default;
 
-// $pagination-active-color:           $component-active-color !default;
-// $pagination-active-bg:              $component-active-bg !default;
-// $pagination-active-border-color:    $pagination-active-bg !default;
+// $pagination-active-color:           $primary !default;
+// $pagination-active-bg:              $primary !default;
+// $pagination-active-border-color:    $primary !default;
 
 // $pagination-disabled-color:         $gray-600 !default;
 // $pagination-disabled-bg:            $white !default;

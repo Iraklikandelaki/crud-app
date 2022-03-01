@@ -10,9 +10,28 @@
       <b-button
         variant="primary"
         class="pointer mr-4"
-        @click="deleteUser(user.id)"
+        v-b-modal="'modal-'+user.id"
         >Delete</b-button
       >
+      <b-modal :id="'modal-'+user.id" title="Delete User Dialog">
+        <p class="my-4">Are you sure you want to delete this user?</p>
+
+        <div slot="modal-footer">
+          <b-button
+            variant="primary"
+            class="pointer mr-4"
+            @click="deleteUser(user.id); $bvModal.hide(`modal-${user.id}`)"
+            >Yes</b-button
+          >
+          <b-button
+            variant="dark"
+            class="pointer"
+            @click="$bvModal.hide(`modal-${user.id}`)"
+            >No</b-button
+          >
+        </div>
+      </b-modal>
+
       <router-link to="/edit">
         <b-button variant="dark" class="pointer" @click="selectUser(user)"
           >Edit</b-button
@@ -21,17 +40,23 @@
     </b-card-header>
     <b-col>
       <b-row class="mb-4" align-v="center">
-        <b-icon icon="person-fill" class="mr-2"></b-icon> Firstname: {{ user.firstName }}
+        <b-icon icon="person-fill" class="mr-2"></b-icon> Firstname:
+        <span class="text-secondary ml-2">{{ user.firstName }}</span>
       </b-row>
 
       <b-row class="mb-4" align-v="center">
-        <b-icon icon="person-fill" class="mr-2"></b-icon> Lastname: {{ user.lastName }}
+        <b-icon icon="person-fill" class="mr-2"></b-icon> Lastname:
+        <span class="text-secondary ml-2"> {{ user.lastName }} </span>
       </b-row>
 
-      <b-row class="mb-4"  align-v="center">   <b-icon icon="person-circle" class="mr-2"></b-icon> Username: {{ user.userName }} </b-row>
+      <b-row class="mb-4" align-v="center">
+        <b-icon icon="person-circle" class="mr-2"></b-icon> Username:
+        <span class="text-secondary ml-2"> {{ user.userName }} </span>
+      </b-row>
 
       <b-row align-v="center">
-        <b-icon icon="envelope" class="mr-2"></b-icon> E-mail: {{ user.email }}
+        <b-icon icon="envelope" class="mr-2"></b-icon> E-mail:
+        <span class="text-secondary ml-2"> {{ user.email }} </span>
       </b-row>
     </b-col>
   </b-card>
