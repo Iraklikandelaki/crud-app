@@ -11,10 +11,10 @@ import Card from "@/components/UI/Card";
 export default {
   data() {
     return {
-      userListSliced: [],
-      filteredList: [],
-      currentPage: 1,
-      userId: null,
+      // userListSliced: [],
+      // filteredList: [],
+      // currentPage: 1,
+      // userId: null,
     };
   },
   components: {
@@ -24,30 +24,65 @@ export default {
   mounted() {
     this.$on("paginate", this.filterList);
     this.$on("deletedUser", (userId) => {
-      this.userId = userId;
+      this.$store.commit("setState", {
+        key: "userId",
+        val: userId,
+      });
+      // this.userId = userId;
     });
   },
   computed: {
     userList() {
       return this.$store.state.users;
     },
+    userListSliced() {
+      return this.$store.state.userListSliced;
+    },
+    filteredList() {
+      return this.$store.state.filteredList;
+    },
+    userId() {
+      return this.$store.state.userId;
+    },
+    currentPage() {
+      return this.$store.state.currentPage;
+    },
   },
   methods: {
     sliceList(curr, list = this.userList) {
       const param1 = (curr - 1) * 5;
-      this.userListSliced = list.slice(param1, param1 + 5);
+      const userListSliced = list.slice(param1, param1 + 5);
+      this.$store.commit("setState", {
+        key: "userListSliced",
+        val: userListSliced,
+      });
     },
 
     filterList(curr) {
-      console.log(curr)
-      if(curr) this.currentPage = curr;
+      console.log(curr);
+      if (curr) {
+        this.$store.commit("setState", {
+          key: "currentPage",
+          val: curr,
+        });
+      }
+      // this.currentPage = curr;
       if (this.userId === null) {
-        this.filteredList = this.userList;
+        // this.filteredList = this.userList;
+        this.$store.commit("setState", {
+          key: "filteredList",
+          val: this.userList,
+        });
         this.sliceList(this.currentPage);
       } else {
-        this.filteredList = this.filteredList.filter(
+        const filteredList = this.filteredList.filter(
           (user) => user.id !== this.userId
         );
+        this.$store.commit("setState", {
+          key: "filteredList",
+          val: filteredList,
+        });
+
         this.sliceList(this.currentPage, this.filteredList);
       }
     },

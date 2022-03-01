@@ -48,6 +48,9 @@ export default {
     selectedUser() {
       return this.$store.state.selectedUser;
     },
+    filteredList() {
+      return this.$store.state.filteredList;
+    },
   },
 
   watch: {
@@ -70,15 +73,31 @@ export default {
           this.form[key] = this.selectedUser[key];
         }
       }
-      console.log(this.form)
+    //   console.log(this.form);
       this.replaceForm();
     },
 
-    async replaceForm(){
-      const res = await this.$ax.put(`https://jsonplaceholder.typicode.com/users/${this.selectedUser.id}`, this.form)
-      console.log(res)
-           
-    }
+    async replaceForm() {
+      const res = await this.$ax.put(
+        `https://jsonplaceholder.typicode.com/users/${this.selectedUser.id}`,
+        this.form
+      );
+
+      const finalArr = this.filteredList.map((item) => {
+        if (item.id === this.selectedUser.id) {
+          return this.form;
+        } else {
+          return item;
+        }
+      });
+
+      this.$store.commit("setState", {
+        key: "filteredList",
+        val: finalArr,
+      });
+    //   console.log(finalArr);
+    //   console.log(res);
+    },
   },
 };
 </script>
