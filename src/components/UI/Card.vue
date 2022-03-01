@@ -10,17 +10,20 @@
       <b-button
         variant="primary"
         class="pointer mr-4"
-        v-b-modal="'modal-'+user.id"
+        v-b-modal="'modal-' + user.id"
         >Delete</b-button
       >
-      <b-modal :id="'modal-'+user.id" title="Delete User Dialog">
+      <b-modal :id="'modal-' + user.id" title="Delete User Dialog">
         <p class="my-4">Are you sure you want to delete this user?</p>
 
         <div slot="modal-footer">
           <b-button
             variant="primary"
             class="pointer mr-4"
-            @click="deleteUser(user.id); $bvModal.hide(`modal-${user.id}`)"
+            @click="
+              deleteUser(user.id);
+              $bvModal.hide(`modal-${user.id}`);
+            "
             >Yes</b-button
           >
           <b-button
@@ -67,9 +70,12 @@ export default {
   props: ["user"],
   methods: {
     async deleteUser(userId) {
-      const res = await this.$ax.delete(
-        `https://jsonplaceholder.typicode.com/users/${userId}`
-      );
+      if (userId <= 10) {
+        const res = await this.$ax.delete(
+          `https://jsonplaceholder.typicode.com/users/${userId}`
+        );
+      }
+
       this.$parent.$emit("deletedUser", userId);
     },
     selectUser(user) {

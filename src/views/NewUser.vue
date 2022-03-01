@@ -8,6 +8,7 @@
         v-model="form.firstName"
         placeholder="Firstname"
          size="lg"
+         required
       ></b-form-input>
       <b-form-input
         id="input-2"
@@ -15,6 +16,7 @@
         v-model="form.lastName"
         placeholder="Lastname"
          size="lg"
+         required
       ></b-form-input>
       <b-form-input
         id="input-3"
@@ -22,6 +24,7 @@
         v-model="form.userName"
         placeholder="Username"
          size="lg"
+         required
       ></b-form-input>
 
       <b-form-input
@@ -31,9 +34,11 @@
         type="email"
         placeholder="Email"
          size="lg"
+         required
       ></b-form-input>
 
-      <b-button type="submit" size="lg" variant="primary mt-4">Submit</b-button>
+      <b-button type="submit" size="lg" variant="primary mt-4" v-if="!loading">Submit</b-button>
+       <b-icon icon="arrow-clockwise" animation="spin" font-scale="4" class="mt-4" v-else></b-icon>
     </b-form>
   </b-container>
 </template>
@@ -42,6 +47,7 @@
 export default {
   data() {
     return {
+      loading: false,
       form: {
         email: "",
         firstName: "",
@@ -64,18 +70,25 @@ export default {
     },
 
     async addForm() {
-      this.form.id = this.filteredList.length + 1;
+      this.form.id = this.filteredList[this.filteredList.length -1].id + 1;
+      this.loading = true;
       const res = await this.$ax.post(
         `https://jsonplaceholder.typicode.com/users/`,
         this.form
       );
 
       const finalArr = [...this.filteredList, this.form];
-
+      console.log(finalArr)
+      console.log(this.form.id)
       this.$store.commit("setState", {
         key: "filteredList",
         val: finalArr,
       });
+      this.$store.commit("setState", {
+        key: "userId",
+        val: null,
+      });
+      this.loading = false;
       this.$router.push('/')
 
     },

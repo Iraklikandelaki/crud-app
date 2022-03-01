@@ -11,6 +11,7 @@ export default new Vuex.Store({
     filteredList: {},
     userId: null,
     currentPage: 1,
+    reqStatus: 'pending',
   },
   mutations: {
     setState(state, data) {
@@ -40,6 +41,10 @@ export default new Vuex.Store({
       commit("setState", {
         key: "filteredList",
         val: data,
+      });
+      commit("setState", {
+        key: "reqStatus",
+        val: 'finished',
       });
     },
   },

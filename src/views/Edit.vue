@@ -8,6 +8,7 @@
         v-model="form.firstName"
         :placeholder="selectedUser.firstName"
         size="lg"
+    
        
       ></b-form-input>
       <b-form-input
@@ -34,7 +35,9 @@
          size="lg"
       ></b-form-input>
 
-      <b-button type="submit" size="lg" variant="primary mt-4">Submit</b-button>
+      <b-button type="submit" size="lg" variant="primary mt-4" v-if="!loading">Submit</b-button>
+       <b-icon icon="arrow-clockwise" animation="spin" font-scale="4" class="mt-4" v-else></b-icon>
+
     </b-form>
   </b-container>
 </template>
@@ -43,6 +46,7 @@
 export default {
   data() {
     return {
+      loading: false,
       form: {
         email: "",
         firstName: "",
@@ -82,6 +86,7 @@ export default {
     },
 
     async replaceForm() {
+      this.loading = true;
       if (this.selectedUser.id <= 10) {
         const res = await this.$ax.put(
           `https://jsonplaceholder.typicode.com/users/${this.selectedUser.id}`,
@@ -101,6 +106,7 @@ export default {
         key: "filteredList",
         val: finalArr,
       });
+      this.loading = false;
       this.$router.push('/')
     },
   },

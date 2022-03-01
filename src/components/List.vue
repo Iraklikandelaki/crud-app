@@ -21,14 +21,7 @@
 import Pagination from "@/components/UI/Pagination";
 import Card from "@/components/UI/Card";
 export default {
-  data() {
-    return {
-      // userListSliced: [],
-      // filteredList: [],
-      // currentPage: 1,
-      // userId: null,
-    };
-  },
+
   components: {
     Pagination,
     Card,
@@ -40,7 +33,6 @@ export default {
         key: "userId",
         val: userId,
       });
-      // this.userId = userId;
     });
   },
   computed: {
@@ -110,11 +102,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.list {
-  &__row {
-    // border: 2px solid $primary;
-    // border-radius: 6px;
-  }
-}
-</style>
+
