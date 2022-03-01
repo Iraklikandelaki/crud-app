@@ -18,11 +18,7 @@ export default {
       perPage: 5,
     };
   },
-  methods: {
-      changeToPage(curr){
-          console.log(curr)
-      }
-  }
+
 };
 </script>
 

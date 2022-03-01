@@ -46,48 +46,30 @@ export default {
     };
   },
   computed: {
-
     filteredList() {
       return this.$store.state.filteredList;
     },
   },
 
-
   methods: {
     onSubmit(ev) {
       ev.preventDefault();
-    this.addForm();
+      this.addForm();
     },
 
     async addForm() {
-        this.form.id = this.filteredList.length+1;
+      this.form.id = this.filteredList.length + 1;
       const res = await this.$ax.post(
         `https://jsonplaceholder.typicode.com/users/`,
         this.form
       );
 
-    //   const finalArr = this.filteredList.map((item) => {
-    //     if (item.id === this.selectedUser.id) {
-    //       return this.form;
-    //     } else {
-    //       return item;
-    //     }
-    //   });
-    // console.log(this.filteredList)
-    const finalArr = [...this.filteredList, this.form ];
-    console.log(finalArr)
+      const finalArr = [...this.filteredList, this.form];
 
-    //   this.$store.commit("setState", {
-    //     key: "userList",
-    //     val: finalArr,
-    //   });
       this.$store.commit("setState", {
         key: "filteredList",
         val: finalArr,
       });
-      console.log(this.filteredList)
-    //   console.log(finalArr);
-    //   console.log(res);
     },
   },
 };

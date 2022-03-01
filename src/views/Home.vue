@@ -1,9 +1,7 @@
 <template>
-  <div class="home">
-    <router-link to="/add-user"> <b-button>New User</b-button></router-link>
-
+  <b-container class="home pt-5 pb-5">
     <List />
-  </div>
+  </b-container>
 </template>
 
 <script>

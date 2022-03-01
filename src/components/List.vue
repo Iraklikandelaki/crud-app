@@ -1,8 +1,20 @@
 <template>
-  <b-container class="bv-example-row list">
-    <Card v-for="(user, idx) in userListSliced" :key="idx" :user="user" />
+  <div class="bv-example-row list">
+    <b-row h-align="start">
+      <router-link to="/add-user">
+        <b-button class="mb-4" align-self="start">
+          <b-icon icon="person-plus-fill" class="mr-2"></b-icon> New
+          User</b-button
+        ></router-link
+      >
+    </b-row>
+     <b-row h-align="start">
+       <b-col class="p-0">
+      <Card v-for="(user, idx) in userListSliced" :key="idx" :user="user" />
+      </b-col>
+    </b-row>
     <Pagination :usersLength="filteredList.length" />
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -59,21 +71,13 @@ export default {
     },
 
     filterList(curr) {
-      console.log(curr);
       if (curr) {
         this.$store.commit("setState", {
           key: "currentPage",
           val: curr,
         });
       }
-      // this.currentPage = curr;
       if (this.userId === null) {
-        // this.filteredList = this.userList;
-        // this.$store.commit("setState", {
-        //   key: "filteredList",
-        //   val: this.userList,
-        // });
-
         this.sliceList(this.currentPage);
       } else {
         const filteredList = this.filteredList.filter(
@@ -90,24 +94,14 @@ export default {
   },
 
   watch: {
-    $route(ns) {
-      // this.filterList(this.currentPage);
-    },
-    userId(ns) {
+    userId() {
       this.filterList(this.currentPage);
     },
     userList: {
       immediate: true,
       deep: true,
       handler(ns) {
-        console.log('mounted')
-        console.log(ns)
-        console.log(this.filteredList)
         if (ns.length) {
-          // this.$store.commit("setState", {
-          //   key: "filteredList",
-          //   val: ns,
-          // });
           this.filterList(1);
         }
       },

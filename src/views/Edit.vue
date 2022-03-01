@@ -57,7 +57,6 @@ export default {
     selectedUser: {
       immediate: true,
       handler(ns) {
-        console.log(ns);
         for (const [key, val] of Object.entries(this.form)) {
           this.form[key] = this.selectedUser[key];
         }
@@ -66,14 +65,12 @@ export default {
   },
   methods: {
     onSubmit(ev) {
-      console.log(this.selectedUser);
       ev.preventDefault();
       for (const [key, val] of Object.entries(this.form)) {
         if (!val.length) {
           this.form[key] = this.selectedUser[key];
         }
       }
-      //   console.log(this.form);
       this.replaceForm();
     },
 
@@ -97,9 +94,6 @@ export default {
         key: "filteredList",
         val: finalArr,
       });
-      console.log(finalArr);
-      console.log(this.filteredList);
-      //   console.log(res);
     },
   },
 };
