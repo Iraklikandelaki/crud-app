@@ -36,8 +36,8 @@ export default {
     });
   },
   computed: {
-    userList() {
-      return this.$store.state.users;
+    listStatus() {
+      return this.$store.state.reqStatus;
     },
     userListSliced() {
       return this.$store.state.userListSliced;
@@ -89,11 +89,11 @@ export default {
     userId() {
       this.filterList(this.currentPage);
     },
-    userList: {
+    listStatus: {
       immediate: true,
       deep: true,
       handler(ns) {
-        if (ns.length) {
+        if (ns === 'finished') {
           this.filterList(1);
         }
       },

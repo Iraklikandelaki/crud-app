@@ -5,7 +5,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    users: {},
     selectedUser: {},
     userListSliced: {},
     filteredList: {},
@@ -34,10 +33,7 @@ export default new Vuex.Store({
 
         return obj;
       });
-      commit("setState", {
-        key: "users",
-        val: data,
-      });
+    
       commit("setState", {
         key: "filteredList",
         val: data,

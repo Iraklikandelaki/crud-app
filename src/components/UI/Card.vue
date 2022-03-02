@@ -6,7 +6,7 @@
     text-variant="dark"
     bg-variant="light"
   >
-    <b-card-header class="p-2 mb-2" h-align="end">
+    <b-card-header class="p-2 mb-2" h-align="end" v-if="!loading">
       <b-button
         variant="primary"
         class="pointer mr-4"
@@ -41,6 +41,16 @@
         >
       </router-link>
     </b-card-header>
+
+    <b-icon
+      icon="arrow-clockwise"
+      animation="spin"
+      font-scale="4"
+      class="mt-4"
+      v-else
+      ></b-icon
+    >
+
     <b-col>
       <b-row class="mb-4" align-v="center">
         <b-icon icon="person-fill" class="mr-2"></b-icon> Firstname:
@@ -68,8 +78,14 @@
 <script>
 export default {
   props: ["user"],
+  data() {
+    return {
+      loading: false,
+    };
+  },
   methods: {
     async deleteUser(userId) {
+    this.loading = true;
       if (userId <= 10) {
         const res = await this.$ax.delete(
           `https://jsonplaceholder.typicode.com/users/${userId}`
@@ -77,6 +93,7 @@ export default {
       }
 
       this.$parent.$emit("deletedUser", userId);
+      this.loading = false;
     },
     selectUser(user) {
       this.$store.commit("setState", {
